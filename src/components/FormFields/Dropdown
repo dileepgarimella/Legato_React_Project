@@ -1,0 +1,44 @@
+import { Container, Form, Row, Col, Button } from "react-bootstrap";
+export const DropDown = (props) => {
+  const {
+    label,
+    name,
+    value,
+    eventHandle,
+    validation,
+    choiceData,
+    condition,
+    disabled
+  } = props;
+  console.log(condition);
+  return (
+    <Form.Group>
+      <Form.Label>{label}</Form.Label>
+      <Form.Control
+        as="select"
+        name={name}
+        value={value}
+        style={{
+          borderColor: value === "" && validation ? "red" : "",
+        }}
+        onChange={eventHandle}
+        disabled={disabled && disabled}
+      >
+        {choiceData.map(
+          (e, i) =>
+           condition === undefined || condition==="Manager"?
+              <option key={i} value={e.value}>
+                {e.name}
+              </option>
+              : condition!=="managerList"? 
+              e.value==="Profile" && <option key={i} value={e.value}>
+                {e.name}
+              </option>
+              : <option key={i} value={e}>
+              {e}
+            </option>
+            )}
+      </Form.Control>
+    </Form.Group>
+  );
+};
